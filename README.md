@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/32254390/README.md)
 # Site Agulha num Palheiro
 
 Ficheiros do site agulhanumpalheiro.com.

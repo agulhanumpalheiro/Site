@@ -2,7 +2,7 @@
 $destino = "fernanda@agulhanumpalheiro.com";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-  header("Location: index.html");
+  header("Location: /");
   exit;
 }
 
@@ -16,7 +16,7 @@ $telefone = limpa($_POST["telefone"] ?? "");
 $origem   = limpa($_POST["origem"] ?? "Site");
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $telefone === "") {
-  header("Location: index.html?erro=1");
+  header("Location: /?erro=1");
   exit;
 }
 
@@ -35,5 +35,5 @@ $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
 mail($destino, $assunto, $corpo, $headers);
 
-header("Location: obrigado.html");
+header("Location: /obrigado/");
 exit;
