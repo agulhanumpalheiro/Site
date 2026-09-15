@@ -35,5 +35,5 @@ $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
 mail($destino, $assunto, $corpo, $headers);
 
-header("Location: /obrigado/");
+header("Location: /obrigado/?origem=" . urlencode($origem));
 exit;
