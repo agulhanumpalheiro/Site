@@ -1,17 +1,18 @@
-[README.md](https://github.com/user-attachments/files/32254332/README.md)[Uplo# Site Agulha num Palheiro
+[README.md](https://github.com/user-attachments/files/32254390/README.md)
+# Site Agulha num Palheiro
 
-Ficheiros do site agulhanumpalheiro.com, prontos para deploy.
+Ficheiros do site agulhanumpalheiro.com.
 
-| Ficheiro | Página |
+| Endereço | Ficheiro |
 |---|---|
-| index.html | Site geral (5 serviços) |
-| contacto.html | Landing page geral |
-| loja-online.html | Landing page para lojas online |
-| formacao.html | Landing page de formação/mentoria |
-| sites.html | Landing page de desenvolvimento de sites e lojas |
-| obrigado.html | Página de obrigado (após submeter formulário) |
-| privacidade.html | Política de privacidade (RGPD) |
-| enviar.php | Envia os formulários para fernanda@agulhanumpalheiro.com |
+| agulhanumpalheiro.com | index.html |
+| /contacto/ | contacto/index.html |
+| /loja-online/ | loja-online/index.html |
+| /formacao/ | formacao/index.html |
+| /sites/ | sites/index.html |
+| /obrigado/ | obrigado/index.html |
+| /privacidade/ | privacidade/index.html |
 
-Todos os ficheiros ficam na raiz de `public_html`. Sem pastas.
-ading README.md…]()
+`enviar.php` na raiz envia os formulários para fernanda@agulhanumpalheiro.com e redireciona para /obrigado/.
+
+**Importante:** manter esta estrutura de pastas. Cada página é um `index.html` dentro da sua pasta.
