@@ -11,6 +11,7 @@ function limpa($v) {
 }
 
 $nome     = limpa($_POST["nome"] ?? "");
+$empresa  = limpa($_POST["empresa"] ?? "");
 $email    = limpa($_POST["email"] ?? "");
 $telefone = limpa($_POST["telefone"] ?? "");
 $origem   = limpa($_POST["origem"] ?? "Site");
@@ -24,6 +25,7 @@ $assunto = "Novo contacto do site (" . $origem . ")";
 
 $corpo  = "Chegou um novo contacto pelo site.\n\n";
 $corpo .= "Nome: "     . ($nome !== "" ? $nome : "(nao indicado)") . "\n";
+if ($empresa !== "") $corpo .= "Empresa: " . $empresa . "\n";
 $corpo .= "Email: "    . $email . "\n";
 $corpo .= "Telefone: " . $telefone . "\n";
 $corpo .= "Pagina: "   . $origem . "\n";
