@@ -410,12 +410,13 @@ document.addEventListener('DOMContentLoaded', async function() {
               'Authorization': 'Bearer ' + CRM_KEY
             },
             body: JSON.stringify({
-              nome: campo('nome'),
+              // A página inicial não pede nome: usa o email ou o telefone no lugar dele.
+              nome: campo('nome') || campo('email') || campo('telefone'),
               empresa: campo('empresa'),
               email: campo('email'),
               telefone: campo('telefone'),
               mensagem: campo('mensagem'),
-              origem: 'site'
+              origem: campo('origem') ? 'site - ' + campo('origem') : 'site'
             }),
             signal: controller.signal
           });
