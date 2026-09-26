@@ -59,15 +59,20 @@ if (is_file($tokenFile)) {
     if (!empty($_COOKIE["_fbp"])) $userData["fbp"] = $_COOKIE["_fbp"];
     if (!empty($_COOKIE["_fbc"])) $userData["fbc"] = $_COOKIE["_fbc"];
 
-    $payload = array("data" => array(array(
-      "event_name" => "Lead",
-      "event_time" => time(),
-      "event_id" => $eventId,
-      "action_source" => "website",
-      "event_source_url" => $_SERVER["HTTP_REFERER"] ?? "https://agulhanumpalheiro.com/",
-      "user_data" => $userData,
-      "custom_data" => array("content_name" => $origem),
-    )));
+    // Lead e Registo concluído (CompleteRegistration), com o mesmo event_id do Pixel na página /obrigado/.
+    $eventos = array();
+    foreach (array("Lead", "CompleteRegistration") as $nomeEvento) {
+      $eventos[] = array(
+        "event_name" => $nomeEvento,
+        "event_time" => time(),
+        "event_id" => $eventId,
+        "action_source" => "website",
+        "event_source_url" => $_SERVER["HTTP_REFERER"] ?? "https://agulhanumpalheiro.com/",
+        "user_data" => $userData,
+        "custom_data" => array("content_name" => $origem),
+      );
+    }
+    $payload = array("data" => $eventos);
 
     $ch = curl_init("https://graph.facebook.com/v26.0/374238462144981/events?access_token=" . urlencode($token));
     curl_setopt_array($ch, array(
