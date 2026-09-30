@@ -95,7 +95,7 @@ try {
         "action_source" => "website",
         "event_source_url" => $_SERVER["HTTP_REFERER"] ?? "https://agulhanumpalheiro.com/",
         "user_data" => $userData,
-        "custom_data" => array("content_name" => $origem),
+        "custom_data" => array("content_name" => $origem, "value" => 0, "currency" => "EUR"),
       );
     }
     $payload = array("data" => $eventos);
