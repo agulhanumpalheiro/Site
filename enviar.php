@@ -38,16 +38,28 @@ $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 mail($destino, $assunto, $corpo, $headers);
 
 // --- API de Conversões da Meta (Lead pelo servidor) ---
+// Tudo o que se segue é opcional: se falhar, o contacto já foi enviado por email
+// e a pessoa segue normalmente para /obrigado/. Os erros ficam registados em
+// capi-erro.log, na pasta acima do public_html.
 $eventId = bin2hex(random_bytes(8));
-// O token fica fora do public_html (as publicações por Git não lhe mexem);
-// a cópia dentro do public_html continua a ser aceite como alternativa.
-$tokenFile = null;
-foreach (array(dirname(__DIR__) . "/capi-config.php", __DIR__ . "/capi-config.php") as $f) {
-  if (is_file($f)) { $tokenFile = $f; break; }
-}
-if ($tokenFile) {
-  $token = include $tokenFile;
-  if (is_string($token) && $token !== "" && strpos($token, "COLA_AQUI") === false) {
+$registarErro = function ($msg) {
+  @file_put_contents(dirname(__DIR__) . "/capi-erro.log", date("Y-m-d H:i:s") . " " . $msg . "\n", FILE_APPEND);
+};
+try {
+  // O token fica fora do public_html (as publicações por Git não lhe mexem);
+  // a cópia dentro do public_html continua a ser aceite como alternativa.
+  $tokenFile = null;
+  foreach (array(dirname(__DIR__) . "/capi-config.php", __DIR__ . "/capi-config.php") as $f) {
+    if (@is_file($f)) { $tokenFile = $f; break; }
+  }
+  $token = $tokenFile ? include $tokenFile : null;
+  if (is_string($token)) $token = trim($token);
+  if (!is_string($token) || $token === "" || strpos($token, "COLA_AQUI") !== false) {
+    if ($tokenFile) $registarErro("capi-config.php encontrado mas sem token válido");
+  } elseif (!function_exists("curl_init")) {
+    $registarErro("extensão curl indisponível");
+  } else {
+    $minusculas = function ($t) { return function_exists("mb_strtolower") ? mb_strtolower($t, "UTF-8") : strtolower($t); };
     $tel = preg_replace('/\D/', '', $telefone);
     if (strlen($tel) === 9) $tel = "351" . $tel;
     $userData = array(
@@ -58,8 +70,8 @@ if ($tokenFile) {
     );
     if ($nome !== "") {
       $partes = preg_split('/\s+/', trim($nome));
-      $userData["fn"] = array(hash("sha256", mb_strtolower($partes[0], "UTF-8")));
-      if (count($partes) > 1) $userData["ln"] = array(hash("sha256", mb_strtolower(end($partes), "UTF-8")));
+      $userData["fn"] = array(hash("sha256", $minusculas($partes[0])));
+      if (count($partes) > 1) $userData["ln"] = array(hash("sha256", $minusculas(end($partes))));
     }
     if (!empty($_COOKIE["_fbp"])) $userData["fbp"] = $_COOKIE["_fbp"];
     if (!empty($_COOKIE["_fbc"])) $userData["fbc"] = $_COOKIE["_fbc"];
@@ -87,9 +99,14 @@ if ($tokenFile) {
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_TIMEOUT => 5,
     ));
-    curl_exec($ch);
+    $resposta = curl_exec($ch);
+    $codigo = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if ($resposta === false) $registarErro("curl: " . curl_error($ch));
+    elseif ($codigo !== 200) $registarErro("Meta respondeu " . $codigo . ": " . substr($resposta, 0, 500));
     curl_close($ch);
   }
+} catch (\Throwable $e) {
+  $registarErro(get_class($e) . ": " . $e->getMessage());
 }
 
 header("Location: /obrigado/?origem=" . urlencode($origem) . (isset($eventId) ? "&eid=" . $eventId : ""));
