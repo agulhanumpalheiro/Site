@@ -48,14 +48,23 @@ $registarErro = function ($msg) {
 try {
   // O token fica fora do public_html (as publicações por Git não lhe mexem);
   // a cópia dentro do public_html continua a ser aceite como alternativa.
+  // Preferência: capi-token.txt, só com o token (sem código); em alternativa, capi-config.php.
   $tokenFile = null;
-  foreach (array(dirname(__DIR__) . "/capi-config.php", __DIR__ . "/capi-config.php") as $f) {
-    if (@is_file($f)) { $tokenFile = $f; break; }
+  $token = null;
+  $txt = dirname(__DIR__) . "/capi-token.txt";
+  if (@is_file($txt)) {
+    $tokenFile = $txt;
+    // Remove BOM, espaços, quebras de linha e aspas coladas por engano.
+    $token = trim(preg_replace('/^\xEF\xBB\xBF/', '', (string) @file_get_contents($txt)), " \t\r\n\"'\u{201C}\u{201D}");
+  } else {
+    foreach (array(dirname(__DIR__) . "/capi-config.php", __DIR__ . "/capi-config.php") as $f) {
+      if (@is_file($f)) { $tokenFile = $f; break; }
+    }
+    $token = $tokenFile ? include $tokenFile : null;
   }
-  $token = $tokenFile ? include $tokenFile : null;
   if (is_string($token)) $token = trim($token);
   if (!is_string($token) || $token === "" || strpos($token, "COLA_AQUI") !== false) {
-    if ($tokenFile) $registarErro("capi-config.php encontrado mas sem token válido");
+    if ($tokenFile) $registarErro(basename($tokenFile) . " encontrado mas sem token válido");
   } elseif (!function_exists("curl_init")) {
     $registarErro("extensão curl indisponível");
   } else {
