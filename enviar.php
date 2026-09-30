@@ -39,8 +39,13 @@ mail($destino, $assunto, $corpo, $headers);
 
 // --- API de Conversões da Meta (Lead pelo servidor) ---
 $eventId = bin2hex(random_bytes(8));
-$tokenFile = __DIR__ . "/capi-config.php";
-if (is_file($tokenFile)) {
+// O token fica fora do public_html (as publicações por Git não lhe mexem);
+// a cópia dentro do public_html continua a ser aceite como alternativa.
+$tokenFile = null;
+foreach (array(dirname(__DIR__) . "/capi-config.php", __DIR__ . "/capi-config.php") as $f) {
+  if (is_file($f)) { $tokenFile = $f; break; }
+}
+if ($tokenFile) {
   $token = include $tokenFile;
   if (is_string($token) && $token !== "" && strpos($token, "COLA_AQUI") === false) {
     $tel = preg_replace('/\D/', '', $telefone);
