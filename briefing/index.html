@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Briefing do Cliente · Agulha num Palheiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap">
+<style>
+/* Layout: questionário numa coluna, com um índice fixo das 8 partes ao lado no computador; cores e letra do site Agulha num Palheiro. */
+:root {
+  --fundo: #FAF9F5;
+  --cartao: #FFFFFF;
+  --tinta: #2A1215;
+  --vinho: #5C2B2E;
+  --verde: #0F8F84;
+  --verde-claro: #E3F2F0;
+  --suave: #6F5F5F;
+  --linha: #E7E1DA;
+  --aviso: #FFF4D6;
+  --titulo: "Lora", Georgia, "Times New Roman", serif;
+  --corpo: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body { margin: 0; background: var(--fundo); color: var(--tinta); font-family: var(--corpo); font-size: 17px; line-height: 1.6; padding-inline: 16px; padding-block: 0; }
+h1, h2, h3, p { margin: 0; }
+h1, h2 { font-family: var(--titulo); color: var(--vinho); line-height: 1.15; text-wrap: balance; }
+a { color: var(--verde); }
+.pagina { max-width: 1060px; margin-inline: auto; display: grid; grid-template-columns: 220px 1fr; gap: 48px; padding-block: 48px 80px; }
+.pagina > * { min-width: 0; }
+/* Índice */
+.indice { position: sticky; top: 24px; align-self: start; display: grid; gap: 4px; font-size: .92rem; }
+.indice .marca { font-family: var(--titulo); font-weight: 700; color: var(--vinho); font-size: 1.05rem; margin-bottom: 16px; }
+.indice a { display: grid; grid-template-columns: 26px 1fr; gap: 8px; align-items: center; color: var(--suave); text-decoration: none; padding: 6px 8px; border-radius: 8px; }
+.indice a span { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--linha); display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+.indice a:hover { background: var(--verde-claro); color: var(--tinta); }
+.indice a.feito span { background: var(--verde); border-color: var(--verde); color: #fff; }
+/* Cabeça */
+.cabeca { display: grid; gap: 14px; margin-bottom: 36px; }
+.cabeca .etiqueta { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--verde); }
+.cabeca h1 { font-size: clamp(2.1rem, 4.5vw, 3rem); }
+.cabeca p { color: var(--suave); max-width: 60ch; }
+.cabeca .dados { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: .92rem; color: var(--suave); }
+.cabeca .dados strong { color: var(--tinta); }
+/* Partes */
+form { display: grid; gap: 24px; }
+fieldset { margin: 0; border: 1px solid var(--linha); border-radius: 16px; background: var(--cartao); padding: clamp(20px, 4vw, 32px); display: grid; gap: 20px; min-width: 0; }
+legend { padding: 0; float: left; width: 100%; display: grid; gap: 4px; }
+legend + * { clear: both; }
+legend .num { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--verde); }
+legend h2 { font-size: 1.6rem; }
+legend p { color: var(--suave); font-size: .95rem; font-family: var(--corpo); }
+.duas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.duas > * { min-width: 0; }
+.campo { display: grid; gap: 6px; }
+.campo > label, .grupo > p { font-weight: 700; font-size: .95rem; }
+.campo small, .grupo small { color: var(--suave); font-size: .85rem; font-weight: 400; }
+.obrig { color: var(--vinho); }
+input[type=text], input[type=email], input[type=tel], input[type=url], textarea {
+  font: inherit; font-size: 1rem; width: 100%; padding: .75em .9em; border: 1.5px solid var(--linha); border-radius: 10px; background: var(--fundo); color: var(--tinta);
+}
+textarea { min-height: 96px; resize: vertical; }
+input:focus, textarea:focus { outline: none; border-color: var(--verde); background: var(--cartao); box-shadow: 0 0 0 3px var(--verde-claro); }
+/* Escolhas em pastilha */
+.grupo { display: grid; gap: 10px; }
+.opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.opcoes label { position: relative; cursor: pointer; }
+.opcoes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.opcoes span { display: inline-block; padding: .5em 1em; border: 1.5px solid var(--linha); border-radius: 999px; font-size: .95rem; background: var(--fundo); transition: background .12s, border-color .12s; }
+.opcoes input:checked + span { background: var(--verde); border-color: var(--verde); color: #fff; }
+.opcoes input:focus-visible + span { outline: 3px solid var(--vinho); outline-offset: 2px; }
+/* Acessos */
+.acessos { display: grid; gap: 12px; }
+.acesso { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 16px; border: 1px solid var(--linha); border-radius: 12px; background: var(--fundo); }
+.acesso input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--verde); }
+.acesso strong { display: block; }
+.acesso p { font-size: .9rem; color: var(--suave); margin-top: 4px; }
+.acesso code { font-family: ui-monospace, Menlo, Consolas, monospace; background: var(--verde-claro); color: var(--tinta); padding: .1em .4em; border-radius: 4px; font-size: .88rem; word-break: break-all; }
+.alerta { background: var(--aviso); border-radius: 10px; padding: 12px 14px; font-size: .92rem; }
+/* Fim */
+.fim { display: grid; gap: 14px; justify-items: start; }
+.btn { font: inherit; font-weight: 700; font-size: 1.05rem; background: var(--verde); color: #fff; border: 0; border-radius: 999px; padding: 1em 2em; cursor: pointer; transition: transform .15s ease, background .15s ease; }
+.btn:hover { background: #0B7A70; transform: translateY(-1px); }
+.btn:focus-visible { outline: 3px solid var(--vinho); outline-offset: 3px; }
+.btn[disabled] { opacity: .7; cursor: wait; transform: none; }
+.nota { font-size: .88rem; color: var(--suave); }
+.msg { border-radius: 12px; padding: 14px 16px; font-weight: 600; }
+.msg.erro { background: #FBE9E7; color: #7A2A1E; }
+.msg.info { background: var(--verde-claro); color: var(--tinta); }
+.esconder { position: absolute !important; left: -9999px !important; }
+/* Obrigado */
+.obrigado { max-width: 620px; margin: 15vh auto 0; text-align: center; display: grid; gap: 16px; justify-items: center; }
+.obrigado .visto { width: 72px; height: 72px; border-radius: 50%; background: var(--verde); color: #fff; display: grid; place-items: center; }
+.obrigado h1 { font-size: 2.4rem; }
+.obrigado p { color: var(--suave); }
+@media (max-width: 860px) {
+  .pagina { grid-template-columns: 1fr; gap: 0; padding-block: 28px 64px; }
+  .indice { display: none; }
+  .duas { grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+  .fim { justify-items: stretch; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .opcoes span { transition: none; } }
+</style>
+</head>
+<body>
+<section class="obrigado" id="obrigado" hidden>
+  <span class="visto"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg></span>
+  <h1>Briefing recebido. Obrigada!</h1>
+  <p>Já tenho tudo o que preciso para começar. Vou rever as suas respostas e entro em contacto nos próximos dias úteis com os próximos passos.</p>
+  <p>— Fernanda, Agulha num Palheiro</p>
+</section>
+<div class="pagina" id="pagina">
+  <nav class="indice" aria-label="Partes do briefing">
+    <span class="marca">Agulha num Palheiro</span>
+    <a href="#p1"><span>1</span>Empresa</a>
+    <a href="#p2"><span>2</span>Negócio</a>
+    <a href="#p3"><span>3</span>Cliente ideal</a>
+    <a href="#p4"><span>4</span>Objetivo</a>
+    <a href="#p5"><span>5</span>Marca</a>
+    <a href="#p6"><span>6</span>Provas</a>
+    <a href="#p7"><span>7</span>Acessos</a>
+    <a href="#p8"><span>8</span>Notas</a>
+  </nav>
+  <main>
+    <header class="cabeca">
+      <span class="etiqueta">Briefing do cliente</span>
+      <h1>Vamos conhecer o seu negócio</h1>
+      <p>As suas respostas são a base de tudo o que vamos fazer: landing page, campanhas e redes sociais. Quanto mais concreto for, mais depressa começamos e melhores são os resultados.</p>
+      <div class="dados"><span><strong>Cerca de 10 minutos</strong></span><span>Os campos com <span class="obrig">*</span> são obrigatórios</span><span>As respostas ficam guardadas neste navegador até enviar</span></div>
+    </header>
+    <form id="briefing" action="enviar.php" method="post" novalidate>
+      <div class="esconder" aria-hidden="true"><label for="website">Não preencher</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <fieldset id="p1">
+        <legend><span class="num">Parte 1 de 8</span><h2>Empresa</h2><p>Os dados de contacto e onde a empresa está online.</p></legend>
+        <div class="duas">
+          <div class="campo"><label for="empresa">Nome da empresa <span class="obrig">*</span></label><input id="empresa" name="empresa" type="text" required autocomplete="organization"></div>
+          <div class="campo"><label for="responsavel">O seu nome <span class="obrig">*</span></label><input id="responsavel" name="responsavel" type="text" required autocomplete="name"></div>
+          <div class="campo"><label for="email">Email <span class="obrig">*</span></label><input id="email" name="email" type="email" required autocomplete="email"></div>
+          <div class="campo"><label for="telefone">Telefone <span class="obrig">*</span></label><input id="telefone" name="telefone" type="tel" required autocomplete="tel" inputmode="tel"></div>
+          <div class="campo"><label for="site">Site <small>(se tiver)</small></label><input id="site" name="site" type="text" placeholder="www.empresa.pt"></div>
+          <div class="campo"><label for="instagram">Instagram</label><input id="instagram" name="instagram" type="text" placeholder="@empresa"></div>
+          <div class="campo"><label for="facebook">Facebook</label><input id="facebook" name="facebook" type="text" placeholder="facebook.com/empresa"></div>
+          <div class="campo"><label for="nif">NIF <small>(para o contrato e a fatura)</small></label><input id="nif" name="nif" type="text" inputmode="numeric"></div>
+        </div>
+        <div class="campo"><label for="morada">Morada da sede</label><input id="morada" name="morada" type="text" autocomplete="street-address"></div>
+      </fieldset>
+      <fieldset id="p2">
+        <legend><span class="num">Parte 2 de 8</span><h2>Negócio</h2><p>O que vende e como se destaca.</p></legend>
+        <div class="campo"><label for="descricao">O que faz a sua empresa? <span class="obrig">*</span> <small>Explique como explicaria a um amigo.</small></label><textarea id="descricao" name="descricao" required></textarea></div>
+        <div class="campo"><label for="servicos">Quais são os produtos ou serviços principais? <small>Os que mais quer vender primeiro.</small></label><textarea id="servicos" name="servicos"></textarea></div>
+        <div class="duas">
+          <div class="campo"><label for="preco">Preço médio de uma venda</label><input id="preco" name="preco" type="text" placeholder="Ex.: 80 € por sessão"></div>
+          <div class="campo"><label for="zona">Onde trabalha?</label><input id="zona" name="zona" type="text" placeholder="Ex.: Grande Lisboa, todo o país, online"></div>
+        </div>
+        <div class="campo"><label for="diferenca">O que a distingue da concorrência?</label><textarea id="diferenca" name="diferenca"></textarea></div>
+        <div class="campo"><label for="concorrentes">Quem são os principais concorrentes? <small>Nomes ou links.</small></label><textarea id="concorrentes" name="concorrentes"></textarea></div>
+      </fieldset>
+      <fieldset id="p3">
+        <legend><span class="num">Parte 3 de 8</span><h2>Cliente ideal</h2><p>Para quem vamos falar nos anúncios e nos textos.</p></legend>
+        <div class="campo"><label for="cliente">Quem é o seu melhor cliente? <small>Idade, profissão, onde vive, o que valoriza.</small></label><textarea id="cliente" name="cliente"></textarea></div>
+        <div class="campo"><label for="problema">Que problema resolve a esse cliente?</label><textarea id="problema" name="problema"></textarea></div>
+        <div class="campo"><label for="objecoes">Que dúvidas ou receios tem antes de comprar? <small>Ex.: preço, tempo, confiança.</small></label><textarea id="objecoes" name="objecoes"></textarea></div>
+        <div class="campo"><label for="porque">Porque é que os seus clientes o escolhem a si?</label><textarea id="porque" name="porque"></textarea></div>
+      </fieldset>
+      <fieldset id="p4">
+        <legend><span class="num">Parte 4 de 8</span><h2>Objetivo</h2><p>O que conta como sucesso para si.</p></legend>
+        <div class="grupo"><p>Qual é o objetivo principal? <span class="obrig">*</span></p>
+          <div class="opcoes" role="radiogroup">
+            <label><input type="radio" name="objetivo" value="Receber pedidos de contacto" required><span>Receber pedidos de contacto</span></label>
+            <label><input type="radio" name="objetivo" value="Vender online"><span>Vender online</span></label>
+            <label><input type="radio" name="objetivo" value="Reservas ou marcações"><span>Reservas ou marcações</span></label>
+            <label><input type="radio" name="objetivo" value="Visitas à loja física"><span>Visitas à loja física</span></label>
+            <label><input type="radio" name="objetivo" value="Dar a conhecer a marca"><span>Dar a conhecer a marca</span></label>
+          </div>
+        </div>
+        <div class="grupo"><p>Que serviços pretende?</p>
+          <div class="opcoes">
+            <label><input type="checkbox" name="servicos_pedidos[]" value="Campanhas Meta (Facebook e Instagram)"><span>Campanhas Meta</span></label>
+            <label><input type="checkbox" name="servicos_pedidos[]" value="Campanhas Google"><span>Campanhas Google</span></label>
+            <label><input type="checkbox" name="servicos_pedidos[]" value="Landing page"><span>Landing page</span></label>
+            <label><input type="checkbox" name="servicos_pedidos[]" value="Gestão de redes sociais"><span>Gestão de redes sociais</span></label>
+            <label><input type="checkbox" name="servicos_pedidos[]" value="Site ou loja online"><span>Site ou loja online</span></label>
+          </div>
+        </div>
+        <div class="campo"><label for="oferta">Tem alguma oferta ou promoção para os anúncios? <small>Ex.: primeira consulta grátis, 10% na primeira compra.</small></label><textarea id="oferta" name="oferta"></textarea></div>
+        <div class="grupo"><p>Orçamento mensal para anúncios <small>(pago diretamente à Meta ou à Google)</small></p>
+          <div class="opcoes" role="radiogroup">
+            <label><input type="radio" name="orcamento" value="Até 150 €"><span>Até 150 €</span></label>
+            <label><input type="radio" name="orcamento" value="150 a 300 €"><span>150 a 300 €</span></label>
+            <label><input type="radio" name="orcamento" value="300 a 600 €"><span>300 a 600 €</span></label>
+            <label><input type="radio" name="orcamento" value="Mais de 600 €"><span>Mais de 600 €</span></label>
+            <label><input type="radio" name="orcamento" value="Ainda não sei"><span>Ainda não sei</span></label>
+          </div>
+        </div>
+        <div class="campo"><label for="inicio">Quando gostaria de começar?</label><input id="inicio" name="inicio" type="text" placeholder="Ex.: já, início de novembro"></div>
+      </fieldset>
+      <fieldset id="p5">
+        <legend><span class="num">Parte 5 de 8</span><h2>Marca</h2><p>Como a marca se apresenta.</p></legend>
+        <div class="duas">
+          <div class="campo"><label for="cores">Cores da marca <small>Nomes ou códigos, ex.: #0F8F84.</small></label><input id="cores" name="cores" type="text"></div>
+          <div class="campo"><label for="ficheiros">Link para o logótipo e fotos <small>Google Drive, Dropbox ou WeTransfer.</small></label><input id="ficheiros" name="ficheiros" type="text" placeholder="https://"></div>
+        </div>
+        <div class="grupo"><p>Como fala com os clientes? <small>Escolha até 3.</small></p>
+          <div class="opcoes" id="tom">
+            <label><input type="checkbox" name="tom[]" value="Próximo"><span>Próximo</span></label>
+            <label><input type="checkbox" name="tom[]" value="Profissional"><span>Profissional</span></label>
+            <label><input type="checkbox" name="tom[]" value="Descontraído"><span>Descontraído</span></label>
+            <label><input type="checkbox" name="tom[]" value="Premium"><span>Premium</span></label>
+            <label><input type="checkbox" name="tom[]" value="Técnico"><span>Técnico</span></label>
+            <label><input type="checkbox" name="tom[]" value="Divertido"><span>Divertido</span></label>
+            <label><input type="checkbox" name="tom[]" value="Inspirador"><span>Inspirador</span></label>
+          </div>
+        </div>
+        <div class="campo"><label for="referencias">Marcas que admira <small>De qualquer área. Diga o que gosta nelas.</small></label><textarea id="referencias" name="referencias"></textarea></div>
+        <div class="campo"><label for="evitar">Há alguma coisa que não quer de todo? <small>Cores, palavras, tipo de imagens.</small></label><textarea id="evitar" name="evitar"></textarea></div>
+      </fieldset>
+      <fieldset id="p6">
+        <legend><span class="num">Parte 6 de 8</span><h2>Provas</h2><p>O que mostra que a empresa cumpre o que promete. É o que mais convence nos anúncios.</p></legend>
+        <div class="campo"><label for="testemunhos">Testemunhos de clientes <small>Cole aqui ou indique onde estão (Google, Facebook).</small></label><textarea id="testemunhos" name="testemunhos"></textarea></div>
+        <div class="campo"><label for="numeros">Números e resultados <small>Ex.: 500 clientes, 15 anos de experiência, 4,9 estrelas no Google.</small></label><textarea id="numeros" name="numeros"></textarea></div>
+      </fieldset>
+      <fieldset id="p7">
+        <legend><span class="num">Parte 7 de 8</span><h2>Acessos</h2><p>Para eu conseguir trabalhar nas suas contas. Marque o que já fez; se tiver dúvidas, eu ajudo na primeira reunião.</p></legend>
+        <p class="alerta"><strong>Nunca envie palavras-passe</strong> neste formulário nem por email. Os acessos dão-se sempre através de convites, como explicado em baixo.</p>
+        <div class="acessos">
+          <label class="acesso"><input type="checkbox" name="acessos[]" value="Meta: parceira adicionada no Gestor de Negócios"><div><strong>Meta (Facebook e Instagram)</strong><p>No Meta Business Suite: Definições → Parceiros → Adicionar → «Dar acesso a um parceiro aos seus ativos». Use o ID de parceiro <code>3705047019595811</code> e dê acesso à página, à conta do Instagram, à conta de anúncios e ao Pixel.</p></div></label>
+          <label class="acesso"><input type="checkbox" name="acessos[]" value="Google Ads: convite enviado"><div><strong>Google Ads</strong><p>Em Ferramentas → Acesso e segurança → «+», convide <code>fernanda@agulhanumpalheiro.com</code> com acesso de administrador.</p></div></label>
+          <label class="acesso"><input type="checkbox" name="acessos[]" value="Site: utilizador criado"><div><strong>Site (WordPress ou outro)</strong><p>Crie um utilizador com o email <code>fernanda@agulhanumpalheiro.com</code> e a função de administrador. O sistema envia-me o convite.</p></div></label>
+          <label class="acesso"><input type="checkbox" name="acessos[]" value="Google Analytics / Search Console: convite enviado"><div><strong>Google Analytics e Search Console</strong> <small>(se tiver)</small><p>Convide <code>fernanda@agulhanumpalheiro.com</code> nas definições de cada um.</p></div></label>
+        </div>
+        <div class="campo"><label for="acessos_notas">Alguma nota sobre os acessos? <small>Ex.: não sei onde está a conta de anúncios.</small></label><textarea id="acessos_notas" name="acessos_notas"></textarea></div>
+      </fieldset>
+      <fieldset id="p8">
+        <legend><span class="num">Parte 8 de 8</span><h2>Notas</h2><p>Tudo o que não coube nas perguntas anteriores.</p></legend>
+        <div class="campo"><label for="notas">Observações</label><textarea id="notas" name="notas"></textarea></div>
+      </fieldset>
+      <div class="fim">
+        <p class="msg erro" id="erro" role="alert" hidden></p>
+        <button class="btn" type="submit" id="enviar">Enviar briefing</button>
+        <p class="nota">Os dados servem apenas para preparar o seu projeto. Ver a <a href="/privacidade/">política de privacidade</a>.</p>
+      </div>
+    </form>
+  </main>
+</div>
+<script>
+(function () {
+  var CHAVE = 'briefing-agulha';
+  var form = document.getElementById('briefing');
+  var erro = document.getElementById('erro');
+  var botao = document.getElementById('enviar');
+  var params = new URLSearchParams(location.search);
+  function guarda(k, v) { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
+  function le(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  // Depois de enviar: mostra o agradecimento e apaga o rascunho.
+  if (params.get('ok')) {
+    guarda(CHAVE, null);
+    document.getElementById('pagina').hidden = true;
+    document.getElementById('obrigado').hidden = false;
+    return;
+  }
+  if (params.get('erro')) {
+    erro.textContent = params.get('erro') === '2'
+      ? 'Não foi possível enviar o briefing. As suas respostas continuam aqui: tente outra vez daqui a pouco ou envie um email para fernanda@agulhanumpalheiro.com.'
+      : 'Faltam dados obrigatórios: confirme o nome da empresa e o email.';
+    erro.hidden = false;
+  }
+  // Rascunho: guarda as respostas enquanto escreve.
+  function lerForm() {
+    var dados = {};
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || el.name === 'website') return;
+      if (el.type === 'checkbox' || el.type === 'radio') { if (el.checked) (dados[el.name] = dados[el.name] || []).push(el.value); }
+      else dados[el.name] = el.value;
+    });
+    return dados;
+  }
+  function preencher(dados) {
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || !(el.name in dados)) return;
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = dados[el.name].indexOf(el.value) !== -1;
+      else el.value = dados[el.name];
+    });
+  }
+  try { var rascunho = JSON.parse(le(CHAVE) || 'null'); if (rascunho) preencher(rascunho); } catch (e) {}
+  // Índice: marca as partes que já têm respostas.
+  var partes = form.querySelectorAll('fieldset');
+  function atualizaIndice() {
+    partes.forEach(function (p) {
+      var preenchido = Array.prototype.some.call(p.querySelectorAll('input, textarea'), function (el) {
+        return (el.type === 'checkbox' || el.type === 'radio') ? el.checked : el.value.trim() !== '';
+      });
+      var link = document.querySelector('.indice a[href="#' + p.id + '"]');
+      if (link) link.classList.toggle('feito', preenchido);
+    });
+  }
+  var espera;
+  form.addEventListener('input', function () {
+    atualizaIndice();
+    clearTimeout(espera);
+    espera = setTimeout(function () { guarda(CHAVE, JSON.stringify(lerForm())); }, 400);
+  });
+  atualizaIndice();
+  // Tom: no máximo 3 escolhas.
+  document.getElementById('tom').addEventListener('change', function (e) {
+    if (this.querySelectorAll('input:checked').length > 3) e.target.checked = false;
+  });
+  // Validação antes de enviar.
+  form.addEventListener('submit', function (e) {
+    erro.hidden = true;
+    erro.className = 'msg erro';
+    var falta = [];
+    [['empresa', 'nome da empresa'], ['responsavel', 'o seu nome'], ['telefone', 'telefone'], ['descricao', 'o que faz a empresa']].forEach(function (c) {
+      if (!document.getElementById(c[0]).value.trim()) falta.push(c[1]);
+    });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value.trim())) falta.push('um email válido');
+    if (!form.querySelector('input[name="objetivo"]:checked')) falta.push('o objetivo principal');
+    if (falta.length) {
+      e.preventDefault();
+      erro.textContent = 'Falta preencher: ' + falta.join(', ') + '.';
+      erro.hidden = false;
+      erro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    // Fora do site (pré-visualização), não há para onde enviar.
+    if (!/agulhanumpalheiro\.com$/.test(location.hostname)) {
+      e.preventDefault();
+      erro.className = 'msg info';
+      erro.textContent = 'Pré-visualização: tudo certo. No site publicado, este botão envia o briefing para o seu email.';
+      erro.hidden = false;
+      return;
+    }
+    botao.disabled = true;
+    botao.textContent = 'A enviar…';
+  });
+})();
+</script>
+</body>
+</html>
