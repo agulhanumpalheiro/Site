@@ -1,0 +1,302 @@
+<!-- ================== LANDING PAGE · MODELO AGULHA NUM PALHEIRO ================== -->
+<!-- Copiar TUDO (do início ao fim) para um bloco "HTML personalizado" no WordPress. -->
+<!-- Trocar: 1) textos entre [colchetes]  2) cores em "CORES DA MARCA"  3) CONFIGURAÇÃO no fim. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: página de conversão de coluna única com dobra em duas colunas; todo o percurso leva ao formulário. */
+.lp {
+  /* ---------- CORES DA MARCA (trocar por cliente) ---------- */
+  --lp-marca: #17324D;        /* cor principal: títulos, rodapé */
+  --lp-cta: #E8A33D;          /* cor dos botões: a que mais se destaca */
+  --lp-cta-texto: #17324D;    /* texto dentro dos botões */
+  --lp-fundo: #FFFFFF;        /* fundo da página */
+  --lp-fundo-alt: #F3F5F7;    /* fundo das secções alternadas */
+  --lp-texto: #26323D;        /* texto corrido */
+  --lp-suave: #5E6B77;        /* texto secundário */
+  --lp-linha: #DDE3E8;        /* linhas e contornos */
+  /* ---------- LETRAS ---------- */
+  --lp-titulo: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --lp-corpo: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --lp-raio: 14px;
+  color-scheme: light;
+  background: var(--lp-fundo); color: var(--lp-texto);
+  font-family: var(--lp-corpo); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.lp *, .lp *::before, .lp *::after { box-sizing: border-box; }
+.lp h1, .lp h2, .lp h3, .lp p, .lp ul, .lp ol, .lp figure { margin: 0; padding: 0; }
+.lp img { max-width: 100%; height: auto; display: block; }
+.lp a { color: inherit; }
+.lp .lp-wrap { max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+.lp h1, .lp h2, .lp h3 { font-family: var(--lp-titulo); color: var(--lp-marca); line-height: 1.1; text-wrap: balance; letter-spacing: -0.01em; }
+.lp mark.lp-ph { background: #FFF1B8; color: inherit; padding: 0 .25em; border-radius: 3px; }
+/* Botões */
+.lp .lp-btn { display: inline-flex; align-items: center; justify-content: center; gap: .5em; background: var(--lp-cta); color: var(--lp-cta-texto); font: 700 1rem/1.2 var(--lp-corpo); text-decoration: none; padding: 1em 1.6em; border-radius: 999px; border: 0; cursor: pointer; box-shadow: 0 6px 18px -8px rgba(0,0,0,.35); transition: transform .15s ease, filter .15s ease; }
+.lp .lp-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.lp .lp-btn:focus-visible, .lp input:focus-visible { outline: 3px solid var(--lp-marca); outline-offset: 3px; }
+.lp .lp-btn--peq { padding: .7em 1.2em; font-size: .92rem; }
+.lp .lp-btn--grande { padding: 1.15em 2em; font-size: 1.08rem; }
+.lp .lp-seta { transition: transform .15s ease; }
+.lp .lp-btn:hover .lp-seta { transform: translateX(3px); }
+/* Cabeçalho */
+.lp-topo { padding-block: 14px; border-bottom: 1px solid var(--lp-linha); }
+.lp-topo .lp-wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.lp-logo { font-family: var(--lp-titulo); font-weight: 700; font-size: 1.3rem; color: var(--lp-marca); text-decoration: none; }
+.lp-logo img { height: 44px; width: auto; }
+/* Primeira dobra */
+.lp-dobra { padding-block: 56px 72px; }
+.lp-dobra .lp-wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+.lp-dobra .lp-wrap > * { min-width: 0; }
+.lp-etiqueta { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--lp-marca); background: var(--lp-fundo-alt); padding: .45em .9em; border-radius: 999px; }
+.lp-dobra h1 { font-size: clamp(2.2rem, 4.6vw, 3.5rem); margin-top: 18px; }
+.lp-dobra .lp-sub { font-size: 1.15rem; color: var(--lp-suave); margin-top: 18px; max-width: 52ch; }
+.lp-lista { list-style: none; display: grid; gap: 10px; margin-top: 24px; }
+.lp-lista li { display: flex; gap: 12px; align-items: flex-start; font-weight: 600; }
+.lp-lista li::before { content: ""; flex: none; width: 22px; height: 22px; margin-top: 3px; border-radius: 50%; background: var(--lp-cta) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317324D' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.2 4L19 7'/%3E%3C/svg%3E") center/14px no-repeat; }
+.lp-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 32px; }
+.lp-confianca { font-size: .9rem; color: var(--lp-suave); }
+.lp-confianca strong { color: var(--lp-texto); }
+.lp-imagem { aspect-ratio: 4 / 5; max-width: 100%; border-radius: calc(var(--lp-raio) * 1.6); background: var(--lp-fundo-alt); border: 2px dashed var(--lp-linha); display: grid; place-items: center; text-align: center; padding: 24px; color: var(--lp-suave); font-size: .95rem; overflow: hidden; }
+.lp-imagem img { width: 100%; height: 100%; object-fit: cover; }
+/* Benefícios + prova */
+.lp-seccao { padding-block: 72px; }
+.lp-seccao--alt { background: var(--lp-fundo-alt); }
+.lp-cab { max-width: 640px; display: grid; gap: 12px; margin-bottom: 40px; }
+.lp-cab h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+.lp-cab p { color: var(--lp-suave); }
+.lp-beneficios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.lp-beneficio { background: var(--lp-fundo); border: 1px solid var(--lp-linha); border-radius: var(--lp-raio); padding: 28px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.lp-beneficio .lp-num { font-family: var(--lp-titulo); font-weight: 700; font-size: 2.2rem; line-height: 1; color: var(--lp-cta); }
+.lp-beneficio h3 { font-size: 1.25rem; }
+.lp-beneficio p { color: var(--lp-suave); font-size: .98rem; }
+.lp-testemunho { margin-top: 40px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; max-width: 760px; }
+.lp-testemunho .lp-foto { width: 64px; height: 64px; border-radius: 50%; background: var(--lp-linha); overflow: hidden; }
+.lp-testemunho blockquote { margin: 0; font-size: 1.15rem; font-weight: 500; }
+.lp-testemunho cite { display: block; margin-top: 6px; font-style: normal; font-size: .9rem; color: var(--lp-suave); }
+.lp-meio { margin-top: 44px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+/* Formulário */
+.lp-form-zona .lp-wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+.lp-form-zona .lp-wrap > * { min-width: 0; }
+.lp-form-zona h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+.lp-form-zona .lp-intro { color: var(--lp-suave); margin-top: 14px; }
+.lp-passos { list-style: none; counter-reset: passo; display: grid; gap: 16px; margin-top: 28px; }
+.lp-passos li { counter-increment: passo; display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+.lp-passos li::before { content: counter(passo); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--lp-marca); color: var(--lp-fundo); font-weight: 700; }
+.lp-passos strong { display: block; color: var(--lp-marca); }
+.lp-passos span { color: var(--lp-suave); font-size: .95rem; }
+.lp-form { background: var(--lp-fundo); border: 1px solid var(--lp-linha); border-radius: calc(var(--lp-raio) * 1.4); padding: clamp(22px, 4vw, 36px); box-shadow: 0 24px 48px -28px rgba(23,50,77,.35); display: grid; gap: 16px; }
+.lp-form h3 { font-size: 1.35rem; }
+.lp-campo { display: grid; gap: 6px; }
+.lp-campo label { font-size: .9rem; font-weight: 700; }
+.lp-campo input { font: inherit; font-size: 1rem; padding: .85em 1em; border: 1.5px solid var(--lp-linha); border-radius: 10px; background: var(--lp-fundo); color: var(--lp-texto); width: 100%; }
+.lp-campo input:focus { border-color: var(--lp-marca); }
+.lp-consent { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; color: var(--lp-suave); line-height: 1.5; }
+.lp-consent input { width: 18px; height: 18px; margin-top: 2px; flex: none; accent-color: var(--lp-marca); }
+.lp-mel { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+.lp-form .lp-btn { width: 100%; }
+.lp-form .lp-btn[disabled] { opacity: .7; cursor: wait; transform: none; }
+.lp-nota { font-size: .82rem; color: var(--lp-suave); text-align: center; }
+.lp-erro { background: #FDECEA; color: #8A2318; border-radius: 10px; padding: 10px 14px; font-size: .92rem; font-weight: 600; }
+.lp-sucesso { text-align: center; display: grid; gap: 12px; justify-items: center; padding-block: 24px; }
+.lp-sucesso .lp-visto { color: var(--lp-cta-texto); width: 64px; height: 64px; border-radius: 50%; background: var(--lp-cta); display: grid; place-items: center; }
+.lp-sucesso h3 { font-size: 1.6rem; }
+.lp-sucesso p { color: var(--lp-suave); max-width: 40ch; }
+/* Rodapé */
+.lp-rodape { background: var(--lp-marca); color: rgba(255,255,255,.82); padding-block: 44px 32px; font-size: .92rem; }
+.lp-rodape .lp-wrap { display: grid; gap: 28px; }
+.lp-rodape-cima { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+.lp-rodape .lp-logo { color: #fff; }
+.lp-rodape p { margin-top: 8px; max-width: 38ch; }
+.lp-rodape-contactos { display: grid; gap: 6px; }
+.lp-rodape-contactos strong { color: #fff; }
+.lp-rodape-baixo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(255,255,255,.18); padding-top: 20px; font-size: .84rem; }
+.lp-rodape-baixo nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.lp-rodape a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+/* WhatsApp flutuante */
+.lp-wa { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: grid; place-items: center; box-shadow: 0 8px 22px rgba(0,0,0,.25); z-index: 999; }
+.lp-wa svg { width: 30px; height: 30px; fill: #fff; }
+/* Telemóvel */
+@media (max-width: 860px) {
+  .lp { font-size: 16px; }
+  .lp-dobra { padding-block: 32px 56px; }
+  .lp-dobra .lp-wrap, .lp-form-zona .lp-wrap { grid-template-columns: 1fr; gap: 36px; }
+  .lp-imagem { aspect-ratio: 4 / 3; }
+  .lp-beneficios { grid-template-columns: 1fr; }
+  .lp-seccao { padding-block: 56px; }
+  .lp-acoes .lp-btn, .lp-meio .lp-btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .lp .lp-btn, .lp .lp-seta { transition: none; } }
+</style>
+<div class="lp" id="lp-topo">
+  <!-- ============ CABEÇALHO ============ -->
+  <header class="lp-topo">
+    <div class="lp-wrap">
+      <a class="lp-logo" href="#lp-topo">[Nome ou logótipo]</a>
+      <!-- BOTÃO 1 -->
+      <a class="lp-btn lp-btn--peq" href="#lp-formulario">[Quero saber mais]</a>
+    </div>
+  </header>
+  <!-- ============ PRIMEIRA DOBRA ============ -->
+  <section class="lp-dobra">
+    <div class="lp-wrap">
+      <div>
+        <span class="lp-etiqueta">[Para quem é: ex. Clínicas em Lisboa]</span>
+        <h1>[Promessa principal: o resultado que o cliente quer, em 1 frase]</h1>
+        <p class="lp-sub">[Como chega lá e em quanto tempo. Uma ou duas frases, sem jargão.]</p>
+        <ul class="lp-lista">
+          <li>[Benefício 1 — concreto e mensurável]</li>
+          <li>[Benefício 2 — elimina uma objeção]</li>
+          <li>[Benefício 3 — o que o torna diferente]</li>
+        </ul>
+        <div class="lp-acoes">
+          <!-- BOTÃO 2 -->
+          <a class="lp-btn lp-btn--grande" href="#lp-formulario">[Quero o meu orçamento grátis] <span class="lp-seta" aria-hidden="true">→</span></a>
+          <p class="lp-confianca"><strong>[Resposta em 24h]</strong> · [Sem compromisso]</p>
+        </div>
+      </div>
+      <!-- Para pôr fotografia: trocar o texto por <img src="LINK-DA-IMAGEM" alt="descrição"> -->
+      <figure class="lp-imagem">[Fotografia principal: o cliente, o produto ou o resultado]</figure>
+    </div>
+  </section>
+  <!-- ============ BENEFÍCIOS + PROVA (pode apagar esta secção inteira) ============ -->
+  <section class="lp-seccao lp-seccao--alt">
+    <div class="lp-wrap">
+      <div class="lp-cab">
+        <h2>[Porque é que isto funciona]</h2>
+        <p>[Uma frase que liga o problema do cliente à sua solução.]</p>
+      </div>
+      <div class="lp-beneficios">
+        <article class="lp-beneficio"><span class="lp-num">[+30%]</span><h3>[Título do ponto 1]</h3><p>[Explicação curta em 1 ou 2 frases.]</p></article>
+        <article class="lp-beneficio"><span class="lp-num">[24h]</span><h3>[Título do ponto 2]</h3><p>[Explicação curta em 1 ou 2 frases.]</p></article>
+        <article class="lp-beneficio"><span class="lp-num">[0 €]</span><h3>[Título do ponto 3]</h3><p>[Explicação curta em 1 ou 2 frases.]</p></article>
+      </div>
+      <div class="lp-testemunho">
+        <div class="lp-foto" aria-hidden="true"></div>
+        <blockquote>“[Testemunho real de um cliente, com um resultado concreto.]”<cite>[Nome] · [Empresa ou cidade]</cite></blockquote>
+      </div>
+      <div class="lp-meio">
+        <!-- BOTÃO 3 -->
+        <a class="lp-btn lp-btn--grande" href="#lp-formulario">[Quero começar] <span class="lp-seta" aria-hidden="true">→</span></a>
+        <p class="lp-confianca">[Vagas limitadas este mês]</p>
+      </div>
+    </div>
+  </section>
+  <!-- ============ FORMULÁRIO ============ -->
+  <section class="lp-seccao lp-form-zona" id="lp-formulario">
+    <div class="lp-wrap">
+      <div>
+        <h2>[Peça já o seu contacto]</h2>
+        <p class="lp-intro">[Deixe os seus dados e falamos consigo. Demora menos de 1 minuto.]</p>
+        <ol class="lp-passos">
+          <li><div><strong>Preenche o formulário</strong><span>Só nome, telefone e email.</span></div></li>
+          <li><div><strong>[Ligamos em 24h]</strong><span>[Para perceber o que precisa.]</span></div></li>
+          <li><div><strong>[Recebe a proposta]</strong><span>[Sem compromisso.]</span></div></li>
+        </ol>
+      </div>
+      <form class="lp-form" id="lp-form" novalidate>
+        <h3>[Quero ser contactado]</h3>
+        <div class="lp-campo"><label for="lp-nome">Nome</label><input id="lp-nome" name="nome" type="text" autocomplete="name" required placeholder="O seu nome"></div>
+        <div class="lp-campo"><label for="lp-telefone">Telefone</label><input id="lp-telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="912 345 678"></div>
+        <div class="lp-campo"><label for="lp-email">Email</label><input id="lp-email" name="email" type="email" autocomplete="email" required placeholder="nome@exemplo.pt"></div>
+        <div class="lp-mel" aria-hidden="true"><label for="lp-site">Não preencher</label><input id="lp-site" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="lp-consent" for="lp-consent"><input id="lp-consent" type="checkbox" required><span>Aceito que me contactem e a <a href="[LINK-POLITICA-PRIVACIDADE]" target="_blank" rel="noopener">política de privacidade</a>.</span></label>
+        <p class="lp-erro" id="lp-erro" hidden></p>
+        <button class="lp-btn lp-btn--grande" type="submit" id="lp-enviar">[Quero ser contactado] <span class="lp-seta" aria-hidden="true">→</span></button>
+        <p class="lp-nota">Os seus dados não são partilhados com ninguém.</p>
+      </form>
+    </div>
+  </section>
+  <!-- ============ RODAPÉ ============ -->
+  <footer class="lp-rodape">
+    <div class="lp-wrap">
+      <div class="lp-rodape-cima">
+        <div><a class="lp-logo" href="#lp-topo">[Nome ou logótipo]</a><p>[Frase curta sobre a empresa.]</p></div>
+        <div class="lp-rodape-contactos">
+          <strong>Contactos</strong>
+          <span>[912 345 678]</span>
+          <span>[geral@empresa.pt]</span>
+          <span>[Morada, Cidade]</span>
+        </div>
+      </div>
+      <div class="lp-rodape-baixo">
+        <span>© <span id="lp-ano">2026</span> [Nome da empresa] · NIF [000000000]</span>
+        <nav><a href="[LINK-POLITICA-PRIVACIDADE]" target="_blank" rel="noopener">Política de privacidade</a><a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener">Livro de reclamações</a></nav>
+      </div>
+    </div>
+  </footer>
+  <a class="lp-wa" id="lp-wa" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.4 13.4 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.8a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.7-.4zM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM20.5 3.5A12 12 0 0 0 1.6 18L0 24l6.2-1.6A12 12 0 0 0 24 12a11.9 11.9 0 0 0-3.5-8.5z"/></svg></a>
+</div>
+<script>
+(function () {
+  /* ================= CONFIGURAÇÃO (trocar por cliente) ================= */
+  var CONFIG = {
+    email: '',                 // email que recebe os contactos. Vazio = modo de teste (não envia).
+    assunto: 'Novo contacto da landing page',
+    origem: 'Landing - [Nome do cliente]',   // aparece no email e no CRM
+    pixelId: '',               // ID do Pixel da Meta. Vazio se o WordPress já tiver o Pixel instalado.
+    whatsapp: '',              // ex.: '351912345678'. Vazio = esconde o botão.
+    paginaObrigado: '',        // ex.: '/obrigado/'. Vazio = mostra a mensagem de sucesso aqui.
+    crm: false                 // true só nas landing pages da Agulha num Palheiro
+  };
+  /* ===================================================================== */
+  var CRM_URL = 'https://yzjgxsvoqvgykhksmbah.supabase.co/functions/v1/novo-lead';
+  var CRM_KEY = 'sb_publishable_wq_yNKT3Cp-zF00b93E6ZQ_6sqsm-Gv';
+  var $ = function (id) { return document.getElementById(id); };
+  $('lp-ano').textContent = new Date().getFullYear();
+  // Pixel da Meta (só se ainda não existir na página)
+  if (CONFIG.pixelId && typeof window.fbq !== 'function') {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', CONFIG.pixelId);
+    window.fbq('track', 'PageView');
+  }
+  // WhatsApp
+  if (CONFIG.whatsapp) { var wa = $('lp-wa'); wa.href = 'https://wa.me/' + CONFIG.whatsapp.replace(/\D/g, ''); wa.hidden = false; }
+  // Deslizar suave até ao formulário e pôr o cursor no primeiro campo
+  document.querySelectorAll('.lp a[href="#lp-formulario"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      $('lp-formulario').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(function () { $('lp-nome').focus({ preventScroll: true }); }, 500);
+    });
+  });
+  // Envio do formulário
+  var form = $('lp-form'), erro = $('lp-erro'), botao = $('lp-enviar');
+  function mostraErro(msg) { erro.textContent = msg; erro.hidden = false; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    erro.hidden = true;
+    var nome = $('lp-nome').value.trim(), tel = $('lp-telefone').value.trim(), email = $('lp-email').value.trim();
+    if (!nome) return mostraErro('Escreva o seu nome.');
+    if (tel.replace(/\D/g, '').length < 9) return mostraErro('Escreva um telefone com pelo menos 9 dígitos.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostraErro('Escreva um email válido, por exemplo nome@exemplo.pt.');
+    if (!$('lp-consent').checked) return mostraErro('Para continuar, aceite a política de privacidade.');
+    if ($('lp-site').value) return; // robô
+    botao.disabled = true; botao.textContent = 'A enviar…';
+    var dados = { nome: nome, telefone: tel, email: email, origem: CONFIG.origem, pagina: location.href };
+    var pedidos = [];
+    if (CONFIG.email) {
+      pedidos.push(fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONFIG.email), {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ Nome: nome, Telefone: tel, Email: email, Origem: CONFIG.origem, Pagina: location.href, _subject: CONFIG.assunto + ' (' + CONFIG.origem + ')', _template: 'table', _captcha: 'false', _replyto: email })
+      }).then(function (r) { if (!r.ok) throw new Error('email ' + r.status); }));
+    }
+    if (CONFIG.crm) {
+      pedidos.push(fetch(CRM_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': CRM_KEY, 'Authorization': 'Bearer ' + CRM_KEY },
+        body: JSON.stringify({ nome: nome, email: email, telefone: tel, origem: dados.origem })
+      }).catch(function (err) { console.error('[CRM]', err); }));
+    }
+    Promise.all(pedidos).then(function () {
+      if (typeof window.fbq === 'function') window.fbq('track', 'Lead', { content_name: CONFIG.origem, value: 0, currency: 'EUR' });
+      if (CONFIG.paginaObrigado) { location.href = CONFIG.paginaObrigado; return; }
+      form.innerHTML = '<div class="lp-sucesso" role="status"><span class="lp-visto"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg></span><h3>Recebemos o seu contacto!</h3><p>' + (CONFIG.email ? 'Vamos falar consigo muito em breve.' : 'Modo de teste: nada foi enviado. Ponha o seu email na CONFIGURAÇÃO para receber os contactos.') + '</p></div>';
+    }).catch(function () {
+      botao.disabled = false; botao.innerHTML = 'Tentar outra vez <span class="lp-seta" aria-hidden="true">→</span>';
+      mostraErro('Não foi possível enviar. Verifique a ligação à internet e tente outra vez' + (CONFIG.whatsapp ? ', ou fale connosco pelo WhatsApp.' : '.'));
+    });
+  });
+})();
+</script>
+<!-- ================== FIM DA LANDING PAGE ================== -->
