@@ -17,3 +17,10 @@ Quando for pedida uma landing page para um cliente:
    (por exemplo, acesso ao email), avisar logo no início.
 4. Se alguma coisa não for possível, dizê-lo de imediato, em vez de andar às voltas.
 5. Respostas curtas e diretas; um passo de cada vez só quando for pedido.
+6. Para clientes, trabalhar **só dentro do WordPress do cliente** (ou da plataforma que ele usar).
+   Não usar serviços externos (FormSubmit, Supabase, Vercel, etc.): o formulário usa o plugin
+   de formulários que o site já tem.
+7. O modelo deve servir de **base reutilizável**: nas landing pages seguintes do mesmo cliente,
+   basta trocar textos, imagens e datas.
+
+Nos projetos próprios (o site Agulha num Palheiro) podem usar-se soluções à medida.
