@@ -9,7 +9,8 @@ Quando for pedida uma landing page para um cliente:
 2. Antes de enviar, confirmar que o modelo já inclui tudo o que foi fornecido:
    - logótipo no topo;
    - imagem principal (versão computador e versão telemóvel);
-   - fotos e vídeo embutidos no modelo (sem obrigar a carregar ficheiros na Multimédia);
+   - fotos e vídeo **não** embutidos no código (tornam a página lenta): entregar num ZIP para
+     carregar de uma vez na Multimédia, com o modelo já a apontar para esses ficheiros;
    - formulário a funcionar, com o email de destino certo;
    - Pixel da Meta (sem contar a dobrar se o site já o tiver);
    - página de obrigado (modelo próprio), com o evento Lead.
