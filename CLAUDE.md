@@ -33,3 +33,5 @@ Nos projetos próprios (o site Agulha num Palheiro) podem usar-se soluções à 
   identificar alguém. Imagens para o Facebook: **sempre 940×788** (publicações e anúncios), também com "você".
 - **Instagram e stories: tratar por "tu"**. Instagram: "link da bio" e hashtags.
   Stories: sem referência a link (o link vai na caixa de link do Meta).
+- **Vídeos e reels: sempre 1080×1350** (Facebook e Instagram). O 9:16 é só para stories
+  (no feed fica pequeno e o Facebook tapa a parte de cima).
