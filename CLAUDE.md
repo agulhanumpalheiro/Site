@@ -25,3 +25,11 @@ Quando for pedida uma landing page para um cliente:
    basta trocar textos, imagens e datas.
 
 Nos projetos próprios (o site Agulha num Palheiro) podem usar-se soluções à medida.
+
+## Redes sociais (clientes)
+
+- Facebook e Instagram têm públicos diferentes: fazer sempre textos e legendas separados.
+- **Facebook: tratar por "você"**, tom mais próximo e explicativo, link na legenda, convidar a
+  identificar alguém. Imagens para o Facebook: **940×788**, também com "você".
+- **Instagram e stories: tratar por "tu"**. Instagram: "link da bio" e hashtags.
+  Stories: sem referência a link (o link vai na caixa de link do Meta).
