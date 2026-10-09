@@ -13,6 +13,7 @@ agulhanumpalheiro.com — Hostinger, publicado por Git.
 | Prospeção Comercial | /prospecao/ | Prospeção Comercial |
 | Consultoria (diagnóstico) | /consultoria/ | Consultoria |
 | Landing geral | /contacto/ | Landing geral |
+| Sobre (apresentação da Agulha) | /sobre/ | — (botões levam a /contacto/) |
 | Obrigado | /obrigado/ | — |
 | Privacidade | /privacidade/ | — |
 
